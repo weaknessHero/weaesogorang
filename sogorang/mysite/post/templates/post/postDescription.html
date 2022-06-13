@@ -1,0 +1,133 @@
+{% extends 'post/baseSearch.html' %}
+{%load static%}
+{% block content %}
+{% block head %}
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+ .map_wrap {position:relative;width:300px;height:350px;}
+ .title {font-weight:bold;display:block;}
+ .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+ #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+ .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+</style>
+{% endblock %}
+    <div id="wrap">
+        <section id="product_box">
+            <div id="contents_product">
+                <div class="box">   
+                    <div class="clear"></div>
+                    <ul class="product_items">
+                        <li><img src="{{ data.image.url }}" width=300px ></li>
+                        
+                        <li class="post_title"><h1>{{data.title}}</h1></li>
+                        			<div class="form-group row">
+                        <li class="product_Name"> 상품 코드 : {{data.productName}}</li>
+                        <li class="product_price"> 가격 : {{data.price}}</li>
+                
+                        <li class="product_state"> 상태 : {{data.status}}</li>
+                        <li class="create_time"> 생성 시간 : {{data.createTime}}</li>
+                        <li class="location"> 지역 : {{data.dealAddress}}</li>
+                        <div class="map_wrap">
+                            <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+                                <div class="hAddr">
+                                    <span class="title">지도중심기준 행정동 주소정보</span>
+                                    <span id="centerAddr"></span>
+                                </div>
+                        </div>
+
+                    </ul>
+
+                    <div class="content">{{data.content}}</div>
+                    {% if data.dealStatus == 1 %}
+                        {% if user.username == data.seller or user.username == data.buyer %}
+                        <a href="{% url 'room' data.id 0 %}"><button>채팅</button></a>
+                        <form action="{% url 'deal_com' data.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">거래확정</button>
+                        </form>
+                        
+                        {% else %}
+                        <label style="font-size: 20px; color: red;">거래중</label>
+                        {% endif %}
+                    {% elif data.dealStatus == 0 and user.is_authenticated %}
+                        {% if user.username == data.seller %}
+                        <a href="{% url 'post_edit' data.id %}"><button>수정</button></a>
+                        {% elif user.username != data.seller %}
+                        <a href="{% url 'req_deal' data.id %}"><button>거래신청</button></a>
+                        {% endif %}
+                    {% endif %}                    
+                </div>
+            </div>
+    </div>
+    </section>
+    <hr class="hidden" />
+{% block script %}
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d366006e8ceeefed767191cac1e7f5a&libraries=services"></script>
+<script>
+    
+var container = document.getElementById('map'),
+    options = {
+         center: new kakao.maps.LatLng({{data.latitude}}, {{data.longitude}}),
+         level: 3
+    };
+ 
+var map = new kakao.maps.Map(container, options);
+ 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+
+// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+
+// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+    searchDetailAddrFromCoords(new kakao.maps.LatLng({{data.latitude}},{{data.longitude}}), function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+            var content = '<div class="bAddr">' +
+                            '<span class="title">법정동 주소정보</span>' + 
+                            detailAddr +
+                        '</div>';
+
+            // 마커를 클릭한 위치에 표시합니다 
+            marker.setPosition(new kakao.maps.LatLng({{data.latitude}},{{data.longitude}}));
+            marker.setMap(map);
+
+            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }   
+    });
+
+function displayCenterInfo(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        var infoDiv = document.getElementById('centerAddr');
+
+        for(var i = 0; i < result.length; i++) {
+            // 행정동의 region_type 값은 'H' 이므로
+            if (result[i].region_type === 'H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+            }
+        }
+    }    
+}
+
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+}
+</script>
+{% endblock%}
+
+{% endblock%}

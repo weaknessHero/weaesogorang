@@ -1,0 +1,30 @@
+{% extends 'users/baseSearch.html' %}
+{%load static%}
+{% block content %}
+	<div id="contents">
+		<h1>나의정보페이지</h1>
+		<hr>
+		<div class="onethird">
+			<h2>개인정보</h2>
+			<p><b>이름</b> {{mine.nickname}}<br>
+			   <b>ID</b> {{mine.username}}<br>
+			   <b>전화번호</b> {{mine.phoneNumber}}<br>
+			   <b>Email</b> {{mine.email}}<br>
+			   <b>기본거래장소</b> {{mine.dealAddress}}<br></p>
+		</div>
+
+		<div class="onethird">
+			<h2>개인정보 수신 동의</h2>
+			<p><b>SMS</b> 동의함<br>
+			   <b>Email</b> 동의함<br>
+			</p>
+        </div>
+        
+		<div class="onethird  last">
+			<h2>구입내역</h2>
+			<p>구입 내역 없음</p>
+		</div>
+	</div>
+<hr class="hidden" style="visibility: hidden;" />
+
+{% endblock%}

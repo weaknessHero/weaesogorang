@@ -1,0 +1,26 @@
+{% extends 'post/baseCategorySearch.html' %} 
+{%load static%}
+{% block content %}
+{% csrf_token %}
+	<div id="wrap">
+
+		<div id="PostList">
+			{% for search in searchList %}
+			<hr  class="hidden" />
+			<div style=" cursor: pointer;" onclick="location.href='{% url 'post_detail' search.id %}';">
+				<h1>{{ search.title }}</h1>
+				<div style="overflow: hidden; width:150px; height:150px">
+					<img src="{{search.image.url}}" height="150px"></img>
+				</div>
+				<h3>{{search.price}}원</h3>
+				<h3>{{search.createTime.year}}년 {{search.createTime.month}}월 {{search.createTime.day}}일 {{search.createTime.hour}}시 {{search.createTime.minute}}분</h3>
+				<h3>{{search.dealAddress}}</h3>
+			</div>
+			{% endfor %}
+		</div>
+		<hr  class="hidden" />
+
+		<div id="작성"><a href="{% url 'create' %}"><button>글 작성</button></a></div>
+
+{% endblock %}
+

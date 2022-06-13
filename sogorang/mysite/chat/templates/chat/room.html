@@ -1,0 +1,334 @@
+{% extends 'chat/baseSearch.html' %}
+{%load static%}
+{% block head %}
+<link rel="stylesheet" href="{% static 'chat/css/chat.css' %}">
+{% endblock%}
+
+{% block content %}
+<div class="chat_wrap">
+    <div id="chat_header">
+        <div class="header"><h5>거래 확정 전 거래하려는 상품이 맞는지 반드시 확인해주세요.</h5></div>
+    </div>
+    <br>
+    <div class="chat">
+        <ul>
+
+            <!-- 동적 생성 -->
+        </ul>
+    </div>
+    <br>
+    <div class="chating_form">
+        <button class="chating1" id="chating1" onclick=on_chat1() value="거래를 원해요">거래를 원해요</button>
+        <button class="chating2" id="chating2" onclick=on_chat2() value="죄송해요, 다른 분과 거래가 진행중입니다.">죄송해요, 다른 분과 거래가 진행중입니다.</button>
+        <button class="chating3" id="chating3" onclick=on_chat3() value="거래를 확정하겠습니다.">거래를 확정하겠습니다.</button>
+        <button class="chating4" id="chating4" onclick=on_chat4() value="지금 출발합니다~">지금 출발합니다~</button>
+        <button class="chating5" id="chating5" onclick=on_chat5() value="곧 도착해요 잠시만 기다려주세요.">곧 도착해요 잠시만 기다려주세요.</button>
+        <button class="chating6" id="chating6" onclick=on_chat6() value="어디세요?">어디세요?</button>
+        <button class="chating7" id="chating7" onclick=on_chat7() value="도착했습니다.">도착했습니다.</button>
+        <button class="chating8" id="chating8" onclick=on_chat8() value="채팅8">채팅8</button>
+        <button class="chating9" id="chating9" onclick=on_chat9() value="채팅9">채팅9</button>
+        <button class="chating10" id="chating10" onclick=on_chat10() value="채팅10">채팅10</button>
+        <br>
+    </div>
+
+    <input id="chat-message-input" style="display:none" type="text"/><br/>
+    <input id="chat-message-submit" style="display:none" type="button" value="Send"/>
+    <form action="{% url 'room' roomName=room_name_json img_onmessage=1%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="images" id="images" accept="image/*">
+        <input type="submit" style="display:none" id="file-submit"></button>
+    </form>
+    <button id="chat-close" style="display:none">나가기</button>   
+    <div class="chat format">
+        <ul>
+            <li>
+                <div class="sender">
+                    <span></span>
+                </div>
+                <div class="message">
+                    <span></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock%}
+
+{% block script %}
+<script>
+function on_chat1(){
+    var x = document.getElementById("chating1").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat2(){
+    var x = document.getElementById("chating2").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat3(){
+    var x = document.getElementById("chating3").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat4(){
+    var x = document.getElementById("chating4").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat5(){
+    var x = document.getElementById("chating5").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat6(){
+    var x = document.getElementById("chating6").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat7(){
+    var x = document.getElementById("chating7").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat8(){
+    var x = document.getElementById("chating8").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat9(){
+    var x = document.getElementById("chating9").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+function on_chat10(){
+    var x = document.getElementById("chating10").value;
+    document.getElementById("chat-message-input").value=x;
+    document.getElementById("chat-message-submit").click();
+}
+
+
+const Chat = (function(){
+
+   const myName = "{{user.nickname}}"; // myName = 메시지 보내는 사람 - 김원래
+   var sender= new Array();
+   sender ={{sender}};
+   var status;
+   var roomName = {{ room_name_json }}; //채팅 로드 - 김원래
+   var img_onmessage={{img_onmessage}};
+   var msg = new Array();
+   var src = new Array();
+   msg ={{chatmessage}};
+   src ={{img_position}};
+  
+   // init 함수 
+   function init() {
+        var chatSocket = new WebSocket(
+            'wss://' + '127.0.0.1:8001' +
+            '/ws/chat/' + roomName + '/');
+
+        chatSocket.onmessage = function(e) {  // 클라이언트들이 메시지를 받음.
+            var data = JSON.parse(e.data);
+            var message = data['message'];
+            var id = data['id'];
+            if(status == "text"){
+                sendMessage(message,myName);
+            }
+            else if(status=="img"){
+                var idx=Math.random().toString(36);
+                var id = myName+idx;
+                var position = data['message'];
+                sendImg(id,"/media/"+message,myName);
+            }
+        
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+
+       if (img_onmessage == 0){
+        if(msg.length > 0){
+           for(var i in msg){
+               if(msg[i]==""){
+                   var idx=Math.random().toString(36);
+                   var id = myName+idx;
+                   sendImg(id,'/media/'+src[i],sender[i]);
+               }
+               else{
+                   sendMessage(msg[i],sender[i]);
+               }
+           }
+        }
+       }
+       else if(img_onmessage==1){
+        if(msg.length > 0){
+           for(var i=0;i < msg.length-1;i++){
+               if(msg[i]==""){
+                   var idx=Math.random().toString(36);
+                   var id = myName+idx;
+                   sendImg(id,'/media/'+src[i],sender[i]);
+               }
+               else{
+                   sendMessage(msg[i],sender[i]);
+               }
+           }
+        }
+        status="img";
+        chatSocket.onopen = () => chatSocket.send(JSON.stringify({
+               'status':status,
+               'message': src[i],
+        }));
+       }
+       
+       document.querySelector('#chat-close').onclick = function(e){
+           chatSocket.send(JSON.stringify({
+               'action': "disconnect",
+               'message': "",
+           }));
+           window.location.pathname = '/chat/'+roomName+'/delete/';
+       }
+       
+
+       
+       
+       document.querySelector('#chat-message-submit').onclick = function(e) { //Send버튼 클릭하는 것으로 변경 - 김원래
+           var messageInputDom = document.querySelector('#chat-message-input');
+           var message = messageInputDom.value;
+           status = "text";
+           chatSocket.send(JSON.stringify({
+               'status':status,
+               'message': message,
+               'sender' : myName
+           }));
+           messageInputDom.value = '';
+       };
+
+       //img 업로드시 채팅
+        document.querySelector('#images').onchange = function (e) {
+            document.querySelector('#file-submit').click();
+  
+       }; 
+
+
+   }
+
+   // 메세지 태그 생성
+   function createMessageTag(LR_className, senderName, message) {
+       // 형식 가져오기
+       let chatLi = $('div.chat.format ul li').clone();
+
+       // 값 채우기
+       chatLi.addClass(LR_className);
+       chatLi.find('.sender span').text(senderName);
+       chatLi.find('.message span').text(message);
+
+       return chatLi;
+   }
+
+      // 이미지 태그 생성
+    function createImgTag(LR_className, senderName, id, position) {
+        let li = $('div.chat.format ul li').clone();
+        li.addClass(LR_className);
+        li.find('.sender span').text(senderName);
+
+        let img =document.createElement('img');
+        img.setAttribute('id',id);
+        img.setAttribute('src',position);
+        img.setAttribute('width','100');
+        li.find('.message span').append(img);
+        
+        return li; 
+   }
+
+   // 메세지 태그 append
+   function appendMessageTag(LR_className, senderName, message) {
+       const chatLi = createMessageTag(LR_className, senderName, message);
+
+       $('div.chat:not(.format) ul').append(chatLi);
+
+       // 스크롤바 아래 고정
+       $('div.chat').scrollTop($('div.chat').prop('scrollHeight'));
+   }
+
+   
+   // 이미지 태그 append
+   function appendImgTag(LR_className, senderName, id, position) {
+       const chatLi = createImgTag(LR_className, senderName, id, position);
+
+       $('div.chat:not(.format) ul').append(chatLi);
+
+       // 스크롤바 아래 고정
+       $('div.chat').scrollTop($('div.chat').prop('scrollHeight'));
+   }
+
+
+   // 메세지 전송
+   function sendMessage(message,sender) {
+       // 서버에 전송하는 코드로 후에 대체
+       const data = {
+           "senderName"    : sender,
+           "message"        : message
+       };
+
+       // 통신하는 기능이 없으므로 여기서 receive
+       resive(data);
+   }
+
+      // 메세지 전송
+      function sendImg(id,position,sender) {
+       // 서버에 전송하는 코드로 후에 대체
+       const data = {
+           "senderName"    : sender,
+           "id"            : id,
+           "position"           : position,
+       };
+
+       // 통신하는 기능이 없으므로 여기서 receive
+       resive_img(data);
+
+
+   }
+
+   
+
+   // 메세지 입력박스 내용 지우기
+   function clearTextarea() {
+       $('div.input-div textarea').val('');
+   }
+
+   // 메세지 수신
+   function resive(data) {
+       const LR = (data.senderName != myName)? "left" : "right";
+       appendMessageTag("right", data.senderName, data.message);
+   }
+
+   function resive_img(data) {
+       const LR = (data.senderName != myName)? "left" : "right";
+       appendImgTag("right", data.senderName, data.id, data.position);
+
+       
+   }
+
+   return {
+       'init': init
+   };
+})();
+
+$(function(){
+   Chat.init();
+});
+</script>
+{% endblock%}
+
+
