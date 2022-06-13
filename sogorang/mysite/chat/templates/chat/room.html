@@ -133,7 +133,7 @@ const Chat = (function(){
    // init 함수 
    function init() {
         var chatSocket = new WebSocket(
-            'wss://' + '127.0.0.1:8001' +
+            'wss://' + '54.180.109.190:8001' +
             '/ws/chat/' + roomName + '/');
 
         chatSocket.onmessage = function(e) {  // 클라이언트들이 메시지를 받음.

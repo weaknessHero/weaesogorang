@@ -65,13 +65,10 @@
     <hr>
     <br>
 </ul>
-
-
-
     {% if data.dealStatus == 1 %}
 		{% if user.username == data.seller or user.username == data.buyer %}
         <div class="Button_1">
-            <button type="button" class="chatingButton" onclick="window.open('{% url 'room' data.id 0 %}')">채팅</button>
+            <button type="button" class="chatingButton2" onclick="window.open('{% url 'room' data.id 0 %}')">채팅</button>
         </div>
 		<form action="{% url 'deal_com' data.id %}" method="post">
 			{% csrf_token %}
