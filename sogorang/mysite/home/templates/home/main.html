@@ -3,6 +3,7 @@
 {% block content %}
 <div id="wrap">
 
+	{% if recommend != 0 %}
 	<div id="PostList">
 		<hr  class="hidden" />
 		<h1>추천판매글</h1>
@@ -15,6 +16,7 @@
 			<h3>{{recommend.createTime.year}}년 {{recommend.createTime.month}}월 {{recommend.createTime.day}}일 {{recommend.createTime.hour}}시 {{recommend.createTime.minute}}분</h3>
 			<h3>{{recommend.dealAddress}}</h3>
 		</div>
+	{% endif %}
 		{% for search in searchList %}
 		<hr  class="hidden" />
 		<div style=" cursor: pointer;" onclick="location.href='{% url 'post_detail' search.id %}';">

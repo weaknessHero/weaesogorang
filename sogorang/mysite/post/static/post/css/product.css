@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.productImage .weegle{
+    width: 100%;
+}
+
+button.backButton{
+    position : absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.productDetail{
+    font-family:sans-serif;
+}
+
+.productDetail .productName{
+    font-size: 150%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.productDetail .productName .State{
+    color : red;
+}
+
+.productDetail .productPrice{
+    font-size: 150%;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.productDetail .productDescrip{
+    font-size: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.productDetail .productCondition{
+    font-size: 150%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.productDetail .ProductLog{
+    font-size: 150%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.productDetail .SimilarProduct{
+    font-size: 150%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.productDetail .chatingButton{
+    width:100%;
+    height:50px;
+    border: 1px solid #7cc0cb;
+    background-color: white;
+    color: #7cc0cb;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.productDetail .chatingButton:hover{
+    color: white;
+    background-color: #7cc0cb;
+}
+
+.productDetail hr{
+    color: black;
+    margin-left: 0px;
+    border-width: 5px;
+}
+
+#contents .product_image{
+    width: 100%;
+    margin-left: 10px;
+}
+
+#contents .product_title{
+    width: 100%;
+    margin-left: 10px;
+}
+
+#contents .product_category{
+    width: 100%;
+    margin-left: 10px;
+}
+
+#contents .product_price{
+    width: 100%;
+    margin-left: 10px;
+}
+
+#contents .product_detail{
+    width: 100%;
+    margin-left: 10px;
+}
+
+#contents .product_state{
+    width: 100%;
+    margin-left: 10px;
+}
+
+#contents .post_button{
+    width: 93%;
+    margin-left: 10px;
+}
+
+.Button_1 .chatingButton {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+} /*채팅하기 버튼 하단 고정

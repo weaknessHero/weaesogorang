@@ -80,7 +80,6 @@ def post_create(request):
 
 
 def post_detail(request, post_id):
-
   if(Post.objects.filter(id = post_id).exists()):
     data= Post.objects.get(id=post_id)
     category = data.category

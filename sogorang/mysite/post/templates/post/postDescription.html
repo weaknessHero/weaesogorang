@@ -4,6 +4,7 @@
 {% block head %}
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" type="text/css"  href="{% static 'post/css/product.css' %}"/>
 <style>
  .map_wrap {position:relative;width:300px;height:350px;}
  .title {font-weight:bold;display:block;}
@@ -12,56 +13,85 @@
  .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 </style>
 {% endblock %}
-    <div id="wrap">
-        <section id="product_box">
-            <div id="contents_product">
-                <div class="box">   
-                    <div class="clear"></div>
-                    <ul class="product_items">
-                        <li><img src="{{ data.image.url }}" width=300px ></li>
-                        
-                        <li class="post_title"><h1>{{data.title}}</h1></li>
-                        			<div class="form-group row">
-                        <li class="product_Name"> 상품 코드 : {{data.productName}}</li>
-                        <li class="product_price"> 가격 : {{data.price}}</li>
-                
-                        <li class="product_state"> 상태 : {{data.status}}</li>
-                        <li class="create_time"> 생성 시간 : {{data.createTime}}</li>
-                        <li class="location"> 지역 : {{data.dealAddress}}</li>
-                        <div class="map_wrap">
-                            <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-                                <div class="hAddr">
-                                    <span class="title">지도중심기준 행정동 주소정보</span>
-                                    <span id="centerAddr"></span>
-                                </div>
-                        </div>
-
-                    </ul>
-
-                    <div class="content">{{data.content}}</div>
-                    {% if data.dealStatus == 1 %}
-                        {% if user.username == data.seller or user.username == data.buyer %}
-                        <a href="{% url 'room' data.id 0 %}"><button>채팅</button></a>
-                        <form action="{% url 'deal_com' data.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">거래확정</button>
-                        </form>
-                        
-                        {% else %}
-                        <label style="font-size: 20px; color: red;">거래중</label>
-                        {% endif %}
-                    {% elif data.dealStatus == 0 and user.is_authenticated %}
-                        {% if user.username == data.seller %}
-                        <a href="{% url 'post_edit' data.id %}"><button>수정</button></a>
-                        {% elif user.username != data.seller %}
-                        <a href="{% url 'req_deal' data.id %}"><button>거래신청</button></a>
-                        {% endif %}
-                    {% endif %}                    
-                </div>
+<div class="productImage">
+    <div style="position: absolute;">
+        <div style="position:relative; top:5px; left:5;" >
+            <img class="backbutton" src="{% static 'post/img/goBack.png' %}" onclick="history.back()"  width="25px" height="25px">
+        </div>
+    </div>
+    <img src="{{ data.image.url }}" class="weegle">
+</div>
+<ul class="productDetail">
+    <br>
+    <li class="create_time"> {{data.createTime.year}}년 {{data.createTime.month}}월 {{data.createTime.day}}일 {{data.createTime.hour}}시 {{data.createTime.minute}}분</li>
+    <hr>
+    <li class="productName">
+        {% if data.dealStatus == 1 %}
+        <p class="State">판매중</p>
+        {% elif data.dealStatus == 0 %}
+        <p class="State">거래가능</p>
+        {% endif %}
+        {{data.title}}</li> <!--상품이름-->
+    <hr>
+    <li class="productPrice">{{data.price}}원</li> <!--상품가격-->
+    <hr>
+    <div class="map_wrap">
+        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+            <div class="hAddr">
+                <span class="title">지도중심기준 행정동 주소정보</span>
+                <span id="centerAddr"></span>
             </div>
     </div>
-    </section>
-    <hr class="hidden" />
+    <hr>
+    <li class="productDescrip">
+        {{data.content}}
+        <br>
+    </li> <!--상세내용-->
+    <hr>
+    <li class="productCondition">{{data.status}}</li> <!--상품상태-->
+    <hr>
+    <li class="ProductLog">최근 거래 기록
+        <hr>
+        <h5 class="log1">1 : 22/06/03 12:00:32&nbsp;|&nbsp;2,000,000원</h5>
+        <h5 class="log2">2 : 22/06/01 15:30:07&nbsp;|&nbsp;2,120,000원</h5>
+        <h5 class="log3">3 : 22/05/26 19:24:57&nbsp;|&nbsp;1,950,000원</h5>
+    </li> <!--최근 거래기록 로그 표시-->
+    <hr>
+    <li class="SimilarProduct">유사 상품
+        <h5 class="similar">상품1</h5>
+        <h5 class="similar">상품2</h5>
+        <h5 class="similar">상품3</h5>
+    </li>
+    <hr>
+    <br>
+</ul>
+
+
+
+    {% if data.dealStatus == 1 %}
+		{% if user.username == data.seller or user.username == data.buyer %}
+        <div class="Button_1">
+            <button type="button" class="chatingButton" onclick="window.open('{% url 'room' data.id 0 %}')">채팅</button>
+        </div>
+		<form action="{% url 'deal_com' data.id %}" method="post">
+			{% csrf_token %}
+            <div class="Button_1">
+                <button type="submit" class="chatingButton">거래확정</button>
+            </div>
+		</form>
+
+		{% endif %}
+	{% elif data.dealStatus == 0 and user.is_authenticated %}
+		{% if user.username == data.seller %}
+        <div class="Button_1">
+            <button type="button" class="chatingButton" onclick="window.open('{% url 'post_edit' data.id %}')">수정</button>
+        </div>
+		{% elif user.username != data.seller %}
+        <div class="Button_1">
+            <button class="chatingButton" onclick="window.open('{% url 'req_deal' data.id %}')">거래 신청</button>
+        </div>
+		{% endif %}
+	{% endif %}
 {% block script %}
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d366006e8ceeefed767191cac1e7f5a&libraries=services"></script>
 <script>

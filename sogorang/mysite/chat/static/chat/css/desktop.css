@@ -2,11 +2,11 @@
 
 @font-face {
     font-family: 'Nanum Gothic';
-    src: url('./font/NanumGothicCoding.ttf');
+    src: url('NanumGothicCoding.ttf');
 }
 @font-face {
     font-family: 'Yanone';
-    src: url('./font/YanoneKaffeesatz-Regular.ttf');
+    src: url('YanoneKaffeesatz-Regular.ttf');
 }
 
 .weegle {
@@ -85,7 +85,7 @@ body {
 }
 
 #wrap {
-    width: 1015px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -194,7 +194,7 @@ h2 {
 
 /*추가 css 리셋*/
 img, input, select, textarea, label {
-    vertical-align: middle;
+    vertical-align: center;
 }
 
 /*portfolio*/
@@ -205,7 +205,7 @@ img, input, select, textarea, label {
 
 .portfolio li {
     text-align: center;
-    float: left;
+    float: center;
     position: relative;
     margin: 0 0 6px 6px;
     padding: 0;
@@ -296,18 +296,29 @@ progress::-moz-progress-bar {
     text-align: center;
 }
 
-.searchbox {
+.searchbox{
     position: relative;
-    text-align: center;
-    width: 400px;
-    margin: 0 auto;
+    width: 100%;
 }
-.searchbutton{
-    position: relative;
 
-    width: 600px;
+
+.searchbutton{
+    position: center;
+    width: 50px;
+    height: 40px;
     margin: 0 auto;
+    border: 1px solid #7cc0cb;
+    background-color: white;
+    color: #7cc0cb;
+    padding: 5px;
+    border-radius: 5px;
 }
+
+.searchbutton:hover{
+    color: white;
+    background-color: #7cc0cb;
+}
+
 input {
     width: 90%;
     border-radius: 10px;
@@ -335,7 +346,7 @@ input {
 
 #slideShow {
     display: block;
-    width: 1010px;
+    width: 100%;
     height: 180px;
     position: relative;
     margin: 10px auto;
@@ -343,11 +354,11 @@ input {
     /*리스트 형식으로 이미지를 일렬로 정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은 hidden으로 숨겨줘야됨*/ 
 }
 
-.slides{
+#wrap #slideShow .slides{
     position: absolute;
     left: 0;
     top: 0;
-    width: 1016px;
+    width: 100%;
     /* 슬라이드할 사진과 마진 총 넓이 */
     transition: left 0.5s ease-out;
     /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
@@ -405,16 +416,15 @@ input {
 
 #contents_product h3{
     float: left;
-    margin-left: 500px;
 }
 
 #product_box p{
-    float: left;
-    margin-left: 340px;
+    width: 100%;
+    float:right;
 }
 
 #product_box{
-    width: 400px;
+    width: 100%;
     padding-top: 30px;
 }
 
@@ -423,13 +433,18 @@ input {
 }
 
 .box {
-    width: 1320px;
+    width: 100%;
 }
 
 .product_box h3{
-float: 25%;
+    float: 25%;
 }
 
 .product_items li{
     cursor: pointer;
 }
+
+.product_items{
+    width:100%;
+}
+

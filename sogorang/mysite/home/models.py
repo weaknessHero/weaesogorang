@@ -66,3 +66,10 @@ class User(AbstractUser):
   longitude = models.FloatField(max_length=100 ,default=0)
   homeAddress = models.TextField(default="")
   cg_views= models.JSONField(null=True, default={"Clothing":0, "Electronics":0 ,"Stationery":0, "Food":0 ,"Household":0})
+
+
+class Data(models.Model):
+  productPIN = models.IntegerField(primary_key=True)
+  name = models.TextField()
+  price = models.TextField(null=True)
+  brand= models.TextField()
