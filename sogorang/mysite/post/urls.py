@@ -10,4 +10,5 @@ urlpatterns = [
     path('edit/<int:post_id>/', views.post_edit,name='post_edit'),
     path('delete/<int:post_id>/', views.post_delete,name='post_delete'),
     path('<int:post_id>/req_deal/', views.req_deal,name='req_deal'),
+    path('data/<int:param>/', views.product_category, name='product_category'),
 ]

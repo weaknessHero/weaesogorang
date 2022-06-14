@@ -49,6 +49,15 @@
 				</div>
 			</div>
 
+			<select name="productPIN" float="right">
+				<option name="none">---</option>
+				{% for post in post %}
+					<option name="name" value={{data.productPIN}}>{{post.name}}</option>
+				{% endfor %}
+			</select>			
+
+			
+
 			<div class="form-group row">
 				<label class="product_price">가격</label>
 				<div class="com-sm-3">

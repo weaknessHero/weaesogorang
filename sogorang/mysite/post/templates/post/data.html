@@ -1,0 +1,32 @@
+{% extends 'post/baseSearch.html' %}
+{%load static%}
+{% block content %}
+    <div id="wrap">
+        <section id="product_box">
+            <div id="contents_product">
+                <div class="box">
+                    <div class="clear"></div>
+
+                    
+                    <ul class="productDetail">
+                        <li><img onclick="javascript:location.href='main.html';" src="{% static 'image/product1.png' %}" width=300px onclick="main.html"></li>
+                        
+                        <li class="productName">상품명 : {{data.name}}</li>
+                        <li class="location"> 브랜드 : {{data.brand}}</li>
+                        <li class="product_PIN"> 상품 코드 : {{data.productPIN}}</li>
+                        <li class="productPrice"> 거래 시세 : {{data.price}} 원</li>
+                
+                        <div id="PostList">
+                            <h1>게시글 정보</h1>
+                            {% for post in postList %}
+                            <h1><a href="/post/{{post.postPIN}}/">{{ post.title }}</a></h1>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+    <hr class="hidden" />
+{% endblock%}

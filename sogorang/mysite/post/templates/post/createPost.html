@@ -51,6 +51,13 @@
 					<input type="radio" name="category" value="Household"> 생활용품
 				</div>
 			</div>
+			<select name="productPIN" float="right">
+				<option name="none">---</option>
+				{% for data in data %}
+					<option name="name" value={{data.productPIN}}>{{data.name}}</option>
+				{% endfor %}
+			</select>			
+
 
 			<div class="form-group row">
 				<label class="product_price">가격</label>

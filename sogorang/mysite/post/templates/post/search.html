@@ -4,10 +4,30 @@
 {% csrf_token %}
 	<div id="wrap">
 
+		<div id="NameList">
+			<h1>상품 정보</h1>
+			<hr  class="hidden" />
+			{% for data in product %}
+			<a href= "{% url 'product_category' data.productPIN %}">
+				<h1>{{ data.title }}</h1>
+				<div style="overflow: hidden; width:150px; height:150px">
+					<img src="{{search.image.url}}" height="150px"></img>
+				</div>
+
+				<li class="productName">상품명 : {{data.name}}</li>
+				<li class="location"> 브랜드 : {{data.brand}}</li>
+				<li class="product_PIN"> 상품 코드 : {{data.productPIN}}</li>
+				<li class="productPrice"> 거래 시세 : {{data.price}} 원</li>
+			</div>
+			
+			{% endfor %}
+		</div>
+		<hr  class="hidden" />
 		<div id="PostList">
+			<h1>게시글 정보</h1>
 			{% for search in searchList %}
 			<hr  class="hidden" />
-			<div style=" cursor: pointer;" onclick="location.href='{% url 'post_detail' search.id %}';">
+			<a href= "{% url 'post_detail' search.postPIN %}">
 				<h1>{{ search.title }}</h1>
 				<div style="overflow: hidden; width:150px; height:150px">
 					<img src="{{search.image.url}}" height="150px"></img>

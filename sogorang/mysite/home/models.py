@@ -12,10 +12,12 @@ class Product(models.Model):
   productName  = models.TextField()
 
 class Post(models.Model):
+  postPIN= models.IntegerField(primary_key=True)
   seller = models.CharField(max_length=150, default="")
   buyer = models.CharField(max_length=150, default="")
   category  = models.CharField(max_length=150, default="")
   productName  = models.CharField(max_length=150, default="")
+  productPIN = models.IntegerField(max_length=16)
   title = models.TextField()
   content = models.TextField()
   image = models.ImageField(null=True, upload_to="posts",blank=True)
@@ -30,10 +32,6 @@ class Post(models.Model):
   dealAddress = models.TextField(default="")
 
   
-class Crawling(models.Model):
-  productPIN = models.IntegerField(max_length=8)
-  price = models.IntegerField(max_length=16)
-  productName= models.IntegerField(max_length = 8)
 
 
 class ChatChannel(models.Model):
