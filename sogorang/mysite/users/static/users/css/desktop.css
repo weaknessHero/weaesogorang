@@ -145,13 +145,13 @@ body {
 }
 
 #footer {
-    padding: 20px 0 15px;
+    padding: 5px 0 15px;
     margin-top: 70px;
-    background-color: #7cc0cb;
+    background-color: #fff;
     font-size: 0.9em; /*브라우저 창 크기에 상관없이 폰트크기가 변함, px은 고정된값*/
     text-align: center;
     font-style: normal;
-    color: #fff;
+    color: black;
     clear: both;
 }
 

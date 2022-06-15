@@ -13,10 +13,10 @@
 </style>
 {% endblock%}
 <hr class="hidden" />
-	<div id="contents">
+	<div id="contents" style="width: 95%; margin-left:8px;">
 		<form action="/post/send/" method="post" enctype="multipart/form-data" >
 			{% csrf_token %}
-			<h1>상품등록</h1>
+			<h2 style="text-align:center;">상품등록</h2>
 
 			<div class="form-group row">
 				<label class="product_category">제목</label>
@@ -33,25 +33,22 @@
 				</div>
 			</div>
 
-			<div class="form-group row">
-				<label class="product_main">상품명</label>
+			<div class="form-group row" >
+				<label class="product_main" >상품명</label>
 				<div class="com-sm-5">
 					<input type="text" id="productName" name="productName" class="form-control">
 				</div>
 			</div>
 
-
-			<div class="form-group row">
+			<div class="row">
 				<label class="product_name">카테고리</label>
-				<div class="product_name_detail">
-					<input type="radio" name="category" value="Clothing"> 의류
-					<input type="radio" name="category" value="Electronics"> 전자제품
-					<input type="radio" name="category" value="Stationery"> 문구
-					<input type="radio" name="category" value="Food"> 식품
-					<input type="radio" name="category" value="Household"> 생활용품
+				<div class="product_name_detail" >
+					<input type="radio" name="category" value="Clothing" style="width: 50%;">의류
+					<input type="radio" name="category" value="Electronics" style="width: 50%;"> 전자제품
+					<input type="radio" name="category" value="Stationery" style="width: 50%;"> 문구
 				</div>
 			</div>
-			<select name="productPIN" float="right">
+			<select name="productPIN" float="right" style="width:95%;">
 				<option name="none">---</option>
 				{% for data in data %}
 					<option name="name" value={{data.productPIN}}>{{data.name}}</option>
@@ -66,23 +63,21 @@
 				</div>
 			</div>
 
-			<div class="form-group row">
+			<div class="form-group row" >
 				<label class="product_detail">상세 내용</label>
 				<div class="com-sm-5">
-					<textarea name="description" cols="50" rows="2" class="form-control"></textarea>
+					<textarea name="description" cols="50" rows="2" class="form-control" style="width: 93%;"></textarea>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="product_condition">상태</label>
 				<div class="com-sm-5">
-					<input type="radio" name="condition" value="상급"> 상급
-					<input type="radio" name="condition" value="중급"> 중급
-					<input type="radio" name="condition" value="하급"> 하급
+					<input type="radio" name="condition" value="상급" style="width: 50%;"> 상급
+					<input type="radio" name="condition" value="중급" style="width: 50%;"> 중급
+					<input type="radio" name="condition" value="하급" style="width: 50%;"> 하급
 				</div>
 			</div>
-
-
 			<div>
 				<button type="button" class="geolocationButton" onclick="getCurrentPosBtn()">내 위치 불러오기</button>
 			 <input type="text" id="search_pos"></input>
@@ -101,7 +96,7 @@
 		 	<input type="text" style="display:none" name="sel_longitude" id="sel_longitude">
 		 	<input type="text" name="sel_address"	id="sel_address">
 
-			<div class="form-group row">
+			<div class="form-group row" style="width:105%;">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="submit" value="작성">
 				</div>

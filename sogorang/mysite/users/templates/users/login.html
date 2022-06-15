@@ -1,58 +1,85 @@
-{% extends 'users/baseSearch.html' %}
 {% load static %}
-{% block head %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width, initial-scale=1.0, maximum-scale=1.0" /> 
+	<meta name="format-detection" content="telephone=no">
+	<title>신뢰성 높은 중고거래, 쇠고랑</title>
+	<link rel="shortcut icon" href="/React-PortFolio/favicon.ico">
+	<link rel="stylesheet" type="text/css"  href="{% static 'users/css/mobile.css' %}" media="only screen and (max-width:400px)"  />
+	<link rel="stylesheet" type="text/css"  href="{% static 'users/css/desktop.css' %}" media="only screen and (min-width:401px)"  />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'users/css/signUp.css' %}" type="text/css" media="all" />
-{% endblock %}
-{% block content %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+	</script> <!-- jquery와 bootstrap을 임포트해줌 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
+	</script>
+	<style type="text/css"></style>
+	{% block head %}
+	{% endblock %}
+</head>
+<body style="margin:0px;">
+  
+	<div id="skipNav">
+		<a href="">신뢰성 높은 중고거래, 쇠고랑</a>
+	</div>
+	<hr class="hidden" />
+	<a href="{% url 'home' %}"><img src="{% static 'users/img/쇠고랑logo.png' %}" class="weegle" alt="LOGO")></a>
+
+    {% block content %} 
+    {% endblock %}
+		
     <div id="container" class="main_container">
         <div style="padding: 20px;"></div>
 
         <!--에러메시지-->
         {% if messages %}
-        <ul class="messages">
+        <ul class="messages"  style="padding-left:0px">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="text-align:center">&nbsp;&nbsp;{{ message }}</li>
             {% endfor %}
         </ul>
         {% endif %}
         <!---->
 
-        <div class="login_container1">
+        <div class="login_container1" style="box-shadow: 0px 0px 0px #ffffff; height: 200px; width:100%;">
             <div class="form_container">
-                <form name="login_form1" method="post">
+                <form name="login_form1" method="post"  style="width:100%;">
                     {% csrf_token %}
-                    <div class="form_title_div">
-                        <p class="form_title_p">로그인</p>
-                    </div>
                     <div>
                         <div>
-                            <a class="form_item_name">ID</a>
+                            <a class="form_item_name">아이디</a>
                         </div>
                         <div>
-                            <input type="text" name="username_login" placeholder="ID" class="form_input"/>
+                            <input type="text" name="username_login" placeholder="ID" class="form_input"  style="width:100%;"/>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_username1" class="form_text_alert"></div>
                         </div>
                     </div>
                     <div>
-                        <div>
-                            <a class="form_item_name">Password</a>
+                        <div style="margin-top:-20px">
+                            <a class="form_item_name">비밀번호</a>
                         </div>
                         <div>
-                            <input type="text" name="password_login" placeholder="Password" class="form_input"/>
+                            <input type="text" name="password_login" placeholder="Password" class="form_input"  style="width:100%;"/>
                         </div>
+                        <div style="margin-top:5px"><a href="{% url 'signup' %}">회원가입</a></div>
                         <div class="form_text_alert_padding">
                             <div id="alert_password1" class="form_text_alert"></div>
                         </div>
                     </div>
-                    <div style="height: 10px;"></div>
                     <div>
-                        <button type="submit" class="form_submit_button">로그인</button>
+                        <div id="alert_password1" class="form_text_alert"></div>
+                    </div>
+                    <div>
+                        <button type="submit" class="form_submit_button" style="margin-top:-30px">로그인</button>
                     </div>
                 </form>
             </div>
         </div>
         <br>
     </div>
-{% endblock %}
+</body>
+</html>

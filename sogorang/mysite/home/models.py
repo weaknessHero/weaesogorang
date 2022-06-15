@@ -12,7 +12,6 @@ class Product(models.Model):
   productName  = models.TextField()
 
 class Post(models.Model):
-  postPIN= models.IntegerField(primary_key=True)
   seller = models.CharField(max_length=150, default="")
   buyer = models.CharField(max_length=150, default="")
   category  = models.CharField(max_length=150, default="")
@@ -20,6 +19,7 @@ class Post(models.Model):
   productPIN = models.IntegerField(max_length=16)
   title = models.TextField()
   content = models.TextField()
+  postPIN = models.IntegerField(primary_key=True)
   image = models.ImageField(null=True, upload_to="posts",blank=True)
   status = models.CharField(max_length=150, default="")
   createTime  = models.DateTimeField(auto_now_add = True)
@@ -58,7 +58,7 @@ class ChatMessage(models.Model):
 class User(AbstractUser):
   nickname  = models.CharField(max_length=16,default="")
   userGrade = models.IntegerField(max_length=8, null=True, default=0)
-  phoneNumber = models.IntegerField(max_length=12, unique=True, default=0)
+  phoneNumber = models.IntegerField(max_length=12, default=0)
   dealAddress = models.TextField(default="")
   latitude = models.FloatField(max_length=100 ,default=0)
   longitude = models.FloatField(max_length=100 ,default=0)

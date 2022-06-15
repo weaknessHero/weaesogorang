@@ -17,17 +17,24 @@
 	{% block head %}
 	{% endblock %}
 </head>
-<body>
+<body style="margin:0px;">
   
 	<div id="skipNav">
 		<a href="">신뢰성 높은 중고거래, 쇠고랑</a>
 	</div>
 	<hr class="hidden" />
 	<a href="{% url 'home' %}"><img src="{% static 'post/img/쇠고랑logo.png' %}" class="weegle" alt="LOGO")></a>
-	<div id ="searchbox">
+	<div id ="searchbox" style="width: 100%; text-align:center">
 		<form action="{% url 'search' %}" method="get">
 			<input type="text" name="keyWord" placeholder="상품을 검색하세요.">
-			<input type="submit" value="전송">
+			<input style="
+			width: 94%;
+			border: 1px solid #7cc0cb;
+			background-color: white;
+			color: #7cc0cb;
+			padding: 5px;
+			border-radius: 5px;
+			" type="submit" value="검색">
 			
 			<br/>
 		<select name="selectbox"  onchange="sellectCategory(this.value);" float="right">
@@ -46,12 +53,19 @@
 		</form>
 	</div>
 	<div id="header">
-		<ul id="menu">
-			<li class="current"><a href="{% url 'home' %}">홈</a></li>
+		<ul id="menu" style="margin:8px;">
 			{% if user.is_authenticated %}
-				<p>{{ user.username }}</p>
-				<a href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
-				<li><a href="{% url 'mypage' %}">마이페이지</a></li>
+				<li>회원명: {{ user.username }}</li>
+				<li><a href="{% url 'home' %}">홈</a></li>
+				<li><a href="javascript:{document.getElementById('logout').submit()}"
+				style="
+				text-decoration: none;
+				font-family: 'Yanone', 'Nanum Gothic', '맑은 고딕', Helvetica, Arial, sans-serif;
+				font-size: 20px;
+				color: #999;
+				text-decoration: none;">
+				로그아웃</a></li>
+				<li style="margin:0px;"><a href="{% url 'mypage' %}">마이페이지</a></li>
 				<form id="logout" method="POST" action="{% url 'logout' %}">
 					{% csrf_token %} <input type="hidden" />
 				</form>
@@ -62,9 +76,11 @@
 			{% endif %}
 		</ul>
 	</div>
-
+	
+	<div style="margin:8px">
     {% block content %} 
-    {% comment %} 상속한 템플릿에서 구현해야 하는 영역 {% endcomment %} 
+	</div>
+	{% comment %} 상속한 템플릿에서 구현해야 하는 영역 {% endcomment %} 
     {% endblock %}
 		
 

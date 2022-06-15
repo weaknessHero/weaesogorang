@@ -7,10 +7,14 @@
                 <div class="box">
                     <div class="clear"></div>
 
-                    
+                    <div style="position: absolute;">
+                        <div style="position:relative; top:5px; left:5;" >
+                            <img class="backbutton" src="{% static 'post/img/goBack.png' %}" onclick="history.back()"  width="25px" height="25px">
+                        </div>
+                    </div>
                     <ul class="productDetail">
-                        <li><img onclick="javascript:location.href='main.html';" src="{% static 'image/product1.png' %}" width=300px onclick="main.html"></li>
-                        
+                        <li><img onclick="javascript:location.href='main.html';" src="{% static 'post/img/wolfGrey.png' %}" width=300px onclick="main.html"></li>
+
                         <li class="productName">상품명 : {{data.name}}</li>
                         <li class="location"> 브랜드 : {{data.brand}}</li>
                         <li class="product_PIN"> 상품 코드 : {{data.productPIN}}</li>

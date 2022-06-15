@@ -1,56 +1,43 @@
 {% extends 'home/baseSearch.html' %}
-{%load static%}
+{% load static %}
 {% block content %}
-<div id="wrap">
-
-	{% if recommend != 0 %}
-	<div id="PostList">
-		<hr  class="hidden" />
-		<h1>추천판매글</h1>
-		<div style=" cursor: pointer;" onclick="location.href='{% url 'post_detail' recommend.id %}';">
-			<h1>{{ recommend.title }}</h1>
+<br>
+<div class="wrap">
+	<div id="contents">
+		<div id="campaign">
+			<img style="width:100%;" src="{% static 'home/img/image1.jpg' %}" alt=""/>
+			<img style="width:100%;" src="{% static 'home/img/picture1.png' %}" alt=""/>
+		</div>
+	</div>
+	<div id="PostList" style="margin:8px;">
+		{% if recommend != 0 %}
+		<hr>
+		<h2 style="color:black;">사용자 맞춤 추천 판매글</h2>
+		<hr>
+		<div style=" cursor: pointer;" onclick="location.href='{% url 'post_detail' recommend.postPIN %}';">
+			<h3>{{ recommend.title }}</h3>
 			<div style="overflow: hidden; width:150px; height:150px">
 				<img src="{{recommend.image.url}}" height="150px"></img>
 			</div>
-			<h3>{{recommend.price}}원</h3>
-			<h3>{{recommend.createTime.year}}년 {{recommend.createTime.month}}월 {{recommend.createTime.day}}일 {{recommend.createTime.hour}}시 {{recommend.createTime.minute}}분</h3>
-			<h3>{{recommend.dealAddress}}</h3>
+			<h5>{{recommend.price}}원</h5>
+			<h5>{{recommend.createTime.year}}년 {{recommend.createTime.month}}월 {{recommend.createTime.day}}일 {{recommend.createTime.hour}}시 {{recommend.createTime.minute}}분</h5>
+			<h5>{{recommend.dealAddress}}</h5>
 		</div>
-	{% endif %}
+		{% endif %}
+		<hr>
+		<h2 style="color:black;">전체 상품</h2>
 		{% for search in searchList %}
 		<hr  class="hidden" />
-		<div style=" cursor: pointer;" onclick="location.href='{% url 'post_detail' search.id %}';">
-			<h1>{{ search.title }}</h1>
+		<div style=" cursor: pointer;" onclick="location.href='{% url 'post_detail' search.postPIN %}';">
+			<h3>{{ search.title }}</h3>
 			<div style="overflow: hidden; width:150px; height:150px">
 				<img src="{{search.image.url}}" height="150px"></img>
 			</div>
-			<h3>{{search.price}}원</h3>
-			<h3>{{search.createTime.year}}년 {{search.createTime.month}}월 {{search.createTime.day}}일 {{search.createTime.hour}}시 {{search.createTime.minute}}분</h3>
-			<h3>{{search.dealAddress}}</h3>
+			<h5>{{search.price}}원</h5>
+			<h5>{{search.createTime.year}}년 {{search.createTime.month}}월 {{search.createTime.day}}일 {{search.createTime.hour}}시 {{search.createTime.minute}}분</h5>
+			<h5>{{search.dealAddress}}</h5>
 		</div>
 		{% endfor %}
 	</div>
-	<hr  class="hidden" />
-	<div id="wrap">
-		<div id="slideShow">
-			<ul class="slides">
-				<li><img src="{% static 'home/img/image1.jpg' %}" alt=""></li>
-				<li><img src="{% static 'home/img/image2.jpg' %}" width="1016" height="200" alt=""></li>
-				<li><img src="{% static 'home/img/image3.jpg' %}" width="1016" height="200" alt=""></li>
-				<li><img src="{% static 'home/img/image4.jpg' %}" width="1016" height="200" alt=""></li>
-				<li><img src="{% static 'home/img/image5.jpg' %}" width="1016" height="200" alt=""></li>
-				<li><img src="{% static 'home/img/image6.jpg' %}" width="1016" height="200" alt=""></li>
-			</ul>
-			<p class="controller">
-				<span class="prev">&lang;</span>
-				<span class="next">&rang;</span>
-			</p>
-		</div>
-		<div id="contents">
-			<div id="campaign">
-				<img src="{% static 'home/img/picture1.png' %}" width="1016" height="200" alt=""  />
-			</div>
-		</div>
-		<hr  class="hidden" />
-		
+</div>
 {% endblock%}

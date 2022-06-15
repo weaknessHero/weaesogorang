@@ -1,34 +1,64 @@
-{% extends 'users/baseSearch.html' %}
 {%load static%}
-{% block content %}
-
-{% block head %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width, initial-scale=1.0, maximum-scale=1.0" /> 
+	<meta name="format-detection" content="telephone=no">
+	<title>신뢰성 높은 중고거래, 쇠고랑</title>
+	<link rel="shortcut icon" href="/React-PortFolio/favicon.ico">
+	<link rel="stylesheet" type="text/css"  href="{% static 'users/css/mobile.css' %}" media="only screen and (max-width:400px)"  />
+	<link rel="stylesheet" type="text/css"  href="{% static 'users/css/desktop.css' %}" media="only screen and (min-width:401px)"  />
     <link rel="stylesheet" href="{% static 'users/css/signUp.css' %}" type="text/css" media="all" />
-{% endblock%}
-    <div id="container" class="main_container">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+	</script> <!-- jquery와 bootstrap을 임포트해줌 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
+	</script>
+	<style type="text/css"></style>
+	{% block head %}
+	{% endblock %}
+</head>
+<body style="margin:0px;">
+  
+	<div id="skipNav">
+		<a href="">신뢰성 높은 중고거래, 쇠고랑</a>
+	</div>
+	<hr class="hidden" />
+	<a href="{% url 'home' %}"><img src="{% static 'users/img/쇠고랑logo.png' %}" class="weegle" alt="LOGO")></a>
+    {% block content %} 
+    {% endblock %}
+	</div>
+    <div id="container" class="main_container" style="height: 650px;">
         <div style="padding: 20px;"></div>
-        <div class="login_container">
-            <div class="form_container">
+        <div class="login_container" style="height:670px; box-shadow:none;">
+            <div class="form_container" style="box-shadow: 0px 0px 0px #ffffff;">
                 <form name="login_form" method="post">
                     {% csrf_token %}
-                    <div class="form_title_div">
-                        <p class="form_title_p">회원가입</p>
-                    </div>
                     <div>
+                        <br>
                         <div>
-                            <a class="form_item_name">username</a>
+                            <a class="form_item_name">아이디</a>
                         </div>
                         <div>
                             <input type="text" id='username' name="username" placeholder="name" class="form_input"/>
-                            <button type="button" onclick="check_username()">중복확인</button>
+                            <button type="button" onclick="check_username()" style="margin-top:5px;
+                            width: 98%;
+                            border: 1px solid #7cc0cb;
+                            background-color: white;
+                            color: #7cc0cb;
+                            padding: 5px;
+                            border-radius: 5px;
+                            ">중복확인</button>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_username" class="form_text_alert"></div>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-top:-20px">
                         <div>
-                            <a class="form_item_name">Email</a>
+                            <a class="form_item_name">이메일</a>
                         </div>
                         <div>
                             <input type="text" name="email" placeholder="E-mail" class="form_input"/>
@@ -37,9 +67,9 @@
                             <div id="alert_email" class="form_text_alert"></div>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-top:-20px">
                         <div>
-                            <a class="form_item_name">Password</a>
+                            <a class="form_item_name">비밀번호</a>
                         </div>
                         <div>
                             <input type="password" name="password" placeholder="Enter password" class="form_input" />
@@ -48,9 +78,9 @@
                             <div id="alert_password" class="form_text_alert"></div>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-top:-20px">
                         <div>
-                            <a class="form_item_name">Confirm Password</a>
+                            <a class="form_item_name">비밀번호 재확인</a>
                         </div>
                         <div>
                             <input type="password" name="password2" onfocus="" placeholder="Enter password again" class="form_input" />
@@ -59,33 +89,47 @@
                             <div id="alert_password2" class="form_text_alert"></div>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-top:-20px">
                         <div>
-                            <a class="form_item_name">NickName</a>
+                            <a class="form_item_name">이름</a>
                         </div>
                         <div>
                             <input type="text" id="nickname" name="nickname" placeholder="nickname" class="form_input"/>
-                            <button type="button" onclick="check_nickname()">중복확인</button>
+                            <button type="button" onclick="check_nickname()"  style="margin-top:5px;
+                            width: 98%;
+                            border: 1px solid #7cc0cb;
+                            background-color: white;
+                            color: #7cc0cb;
+                            padding: 5px;
+                            border-radius: 5px;
+                            ">중복확인</button>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_nickname" class="form_text_alert"></div>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-top:-20px">
                         <div>
-                            <a class="form_item_name">PhoneNumber</a>
+                            <a class="form_item_name">휴대전화</a>
                         </div>
                         <div>
                             <input type="text" id="phonenumber" name="phonenumber" placeholder="PhoneNumber"  class="form_input"/>
-                            <button type="button" onclick="check_phone()">인증</button>
+                            <button type="button" onclick="check_phone()" style="margin-top:5px;
+                            width: 98%;
+                            border: 1px solid #7cc0cb;
+                            background-color: white;
+                            color: #7cc0cb;
+                            padding: 5px;
+                            border-radius: 5px;
+                            ">인증</button>
                         </div>
                         <div class="form_text_alert_padding">
                             <div id="alert_phone" class="form_text_alert"></div>
                         </div>
                     </div>
-                    <div>
+                    <div style="margin-top:-20px">
                         <div>
-                            <a class="form_item_name">HomeAdress</a>
+                            <a class="form_item_name">주소</a>
                         </div>
                         <div>
                             <input type="text" name="homeadress" placeholder="HomeAdress" class="form_input"/>
@@ -96,13 +140,17 @@
                     </div>
                     <div style="height: 10px;"></div>
                     <div>
-                        <button type="button" class="form_submit_button" onclick="signUp()">입력 완료</button>
+                        <hr style="text-align:center;">
+                        <button type="button" class="form_submit_button" onclick="signUp()">가입하기</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-{% endblock%}
+    <address id="footer" style="color: black; padding: 10px 0 15px; background-color:#ffffff">
+        Copyright &copy; 쇠고랑 All. rights reserved <br />
+        <i></i><span>segura(안전한) 쇠고랑</span>
+    </address>
 {% block script %}
 <script  type="text/javascript">
     const exist_username = {{exist_usernam}};

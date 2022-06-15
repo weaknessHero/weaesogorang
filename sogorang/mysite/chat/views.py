@@ -36,7 +36,7 @@ def room(request, roomName,img_onmessage):
     if not(ChatChannel.objects.filter(roomName=roomName).exists()):
         ch = ChatChannel()
         ch.roomName=roomName
-        post=Post.objects.get(id=roomName)
+        post=Post.objects.get(postPIN=roomName)
         seller=post.seller
         buyer=request.user.username
         ch.seller=seller

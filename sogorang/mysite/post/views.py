@@ -13,11 +13,11 @@ def deal_com(request,post_id):
 
 
 def req_deal(request,post_id) :
-  post = Post.objects.get(id=post_id)
+  post = Post.objects.get(postPIN=post_id)
   post.dealStatus=1
   post.buyer=request.user.username
   post.save()
-  return redirect('/chat/'+str(post.id)+'/'+str(0))
+  return redirect('/chat/'+str(post.postPIN)+'/'+str(0))
 
 
 #검색 기능
@@ -69,6 +69,7 @@ def post_send(request):
     post.content= request.POST['description']
     post.status = request.POST['condition']
     post.viewCount = 0
+
     post.price = request.POST['unitPrice']
     post.image = request.FILES['productImage']
     post.dealStatus = 0

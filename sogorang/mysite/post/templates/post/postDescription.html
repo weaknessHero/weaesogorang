@@ -11,6 +11,7 @@
  .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
  #centerAddr {display:block;margin-top:2px;font-weight: normal;}
  .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+ #map{width: 100%;}
 </style>
 {% endblock %}
 <div class="productImage">
@@ -23,7 +24,7 @@
 </div>
 <ul class="productDetail">
     <br>
-    <li class="create_time"> {{data.createTime.year}}년 {{data.createTime.month}}월 {{data.createTime.day}}일 {{data.createTime.hour}}시 {{data.createTime.minute}}분</li>
+    <li class="createTime"> 등록시간 : {{data.createTime.year}}년 {{data.createTime.month}}월 {{data.createTime.day}}일 {{data.createTime.hour}}시 {{data.createTime.minute}}분</li>
     <hr>
     <li class="productName">
         {% if data.dealStatus == 1 %}
@@ -35,14 +36,6 @@
     <hr>
     <li class="productPrice">{{data.price}}원</li> <!--상품가격-->
     <hr>
-    <div class="map_wrap">
-        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-            <div class="hAddr">
-                <span class="title">지도중심기준 행정동 주소정보</span>
-                <span id="centerAddr"></span>
-            </div>
-    </div>
-    <hr>
     <li class="productDescrip">
         {{data.content}}
         <br>
@@ -50,27 +43,22 @@
     <hr>
     <li class="productCondition">{{data.status}}</li> <!--상품상태-->
     <hr>
-    <li class="ProductLog">최근 거래 기록
-        <hr>
-        <h5 class="log1">1 : 22/06/03 12:00:32&nbsp;|&nbsp;2,000,000원</h5>
-        <h5 class="log2">2 : 22/06/01 15:30:07&nbsp;|&nbsp;2,120,000원</h5>
-        <h5 class="log3">3 : 22/05/26 19:24:57&nbsp;|&nbsp;1,950,000원</h5>
-    </li> <!--최근 거래기록 로그 표시-->
+    <div class="map_wrap" style="width:100%">
+        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+            <div class="hAddr">
+                판매희망장소
+                <span class="title">지도중심기준 행정동 주소정보</span>
+                <span id="centerAddr"></span>
+            </div>
+    </div>
     <hr>
-    <li class="SimilarProduct">유사 상품
-        <h5 class="similar">상품1</h5>
-        <h5 class="similar">상품2</h5>
-        <h5 class="similar">상품3</h5>
-    </li>
-    <hr>
-    <br>
 </ul>
     {% if data.dealStatus == 1 %}
 		{% if user.username == data.seller or user.username == data.buyer %}
-        <div class="Button_1">
-            <button type="button" class="chatingButton2" onclick="window.open('{% url 'room' data.id 0 %}')">채팅</button>
+        <div class="Button_1" style="margin:8px;">
+            <button type="button" class="chatingButton2" onclick="window.open('{% url 'room' data.postPIN 0 %}')">채팅</button>
         </div>
-		<form action="{% url 'deal_com' data.id %}" method="post">
+		<form action="{% url 'deal_com' data.postPIN %}" method="post">
 			{% csrf_token %}
             <div class="Button_1">
                 <button type="submit" class="chatingButton">거래확정</button>
@@ -81,11 +69,11 @@
 	{% elif data.dealStatus == 0 and user.is_authenticated %}
 		{% if user.username == data.seller %}
         <div class="Button_1">
-            <button type="button" class="chatingButton" onclick="window.open('{% url 'post_edit' data.id %}')">수정</button>
+            <button type="button" class="chatingButton" onclick="window.open('{% url 'post_edit' data.postPIN %}')">수정</button>
         </div>
 		{% elif user.username != data.seller %}
         <div class="Button_1">
-            <button class="chatingButton" onclick="window.open('{% url 'req_deal' data.id %}')">거래 신청</button>
+            <button class="chatingButton" onclick="window.open('{% url 'req_deal' data.postPIN %}')">거래 신청</button>
         </div>
 		{% endif %}
 	{% endif %}
