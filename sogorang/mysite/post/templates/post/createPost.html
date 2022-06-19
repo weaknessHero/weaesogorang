@@ -33,13 +33,14 @@
 				</div>
 			</div>
 
-			<div class="form-group row">
-				<label class="product_main">상품명</label>
+			<div class="form-group row" >
+				<label class="product_main" >상품명</label>
 				<div class="com-sm-5">
 					<input type="text" id="productName" name="productName" class="form-control" value="{{post.productName}}">
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<div class="form-group row">
 				<label class="product_category">카테고리</label>
 				<div class="product_category_detail">
@@ -51,6 +52,17 @@
 			</div>
 
 			<select name="productPIN" float="right">
+=======
+			<div class="row">
+				<label class="product_name">카테고리</label>
+				<div class="product_name_detail" >
+					<input type="radio" name="category" value="Clothing" style="width: 50%;">의류
+					<input type="radio" name="category" value="Electronics" style="width: 50%;"> 전자제품
+					<input type="radio" name="category" value="Stationery" style="width: 50%;"> 문구
+				</div>
+			</div>
+			<select name="productPIN" float="right" style="width:95%;">
+>>>>>>> baba19e0430a6c8d2cf63178225c3c6028962837
 				<option name="none">---</option>
 				{% for data in data %}
 					{% if post.productPIN == data.productPIN %} 
@@ -70,6 +82,7 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<div class="form-group row">
 				<label class="product_detail"> 지역 </label>
 				<div class="com-sm-5">
@@ -83,6 +96,12 @@
 				<label class="product_detail">상세 내용</label>
 				<div class="com-sm-5">
 					<textarea name="description" cols="50" rows="2" class="form-control">{{post.content}}</textarea>
+=======
+			<div class="form-group row" >
+				<label class="product_detail">상세 내용</label>
+				<div class="com-sm-5">
+					<textarea name="description" cols="50" rows="2" class="form-control" style="width: 93%;"></textarea>
+>>>>>>> baba19e0430a6c8d2cf63178225c3c6028962837
 				</div>
 			</div>
 
@@ -91,6 +110,7 @@
 			<div class="form-group row">
 				<label class="product_condition">상태</label>
 				<div class="com-sm-5">
+<<<<<<< HEAD
 					
 					{% if post.status == "상급" %}<input type="radio" id="status" name="condition" value="상급" checked> 상급{% else %}<input type="radio" name="condition" value="상급"> 상급{%endif%}
 					{% if post.status == "중급" %} <input type="radio" id="status" name="condition" value="중급" checked> 중급{% else %}<input type="radio" name="condition" value="중급"> 중급{%endif%}
@@ -99,6 +119,14 @@
 				</div>
 			</div>
 
+=======
+					<input type="radio" name="condition" value="상급" style="width: 50%;"> 상급
+					<input type="radio" name="condition" value="중급" style="width: 50%;"> 중급
+					<input type="radio" name="condition" value="하급" style="width: 50%;"> 하급
+				</div>
+			</div>
+			<div>
+>>>>>>> baba19e0430a6c8d2cf63178225c3c6028962837
 				<button type="button" class="geolocationButton" onclick="getCurrentPosBtn()">내 위치 불러오기</button>
 			 <input type="text" id="search_pos"></input>
 			 <button type="button" onclick="getSearchPos()">장소검색</button>
