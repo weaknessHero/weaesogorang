@@ -1,9 +1,21 @@
 {% extends 'users/baseSearch.html' %}
 {%load static%}
 {% block content %}
-	<div id="contents">
-		<h1>나의정보페이지</h1>
-		<hr>
+	<div id="contents" style="margin-left: 8px;">
+		<br>
+		<h2 style="
+		color: #888888;
+		font-size: 30px;
+		line-height: 70px;
+		margin-bottom: 30px;
+		text-transform: uppercase;
+		text-align: center;
+		text-shadow: 1px 1px 1px #cecece;
+		font-family: 'Yanone', 'Nanum Gothic', '맑은 고딕', Helvetica, Arial, sans-serif;
+		margin-top:0;
+		margin-bottom:0;
+	">My Information</h2>
+		<hr style="width:95%">
 		<div class="onethird">
 			<h2>개인정보</h2>
 			<p><b>이름</b> {{mine.nickname}}<br>
@@ -12,17 +24,18 @@
 			   <b>Email</b> {{mine.email}}<br>
 			   <b>기본거래장소</b> {{mine.dealAddress}}<br></p>
 		</div>
-
+		<hr style="width:95%">
 		<div class="onethird">
 			<h2>개인정보 수신 동의</h2>
 			<p><b>SMS</b> 동의함<br>
 			   <b>Email</b> 동의함<br>
 			</p>
         </div>
-        
-		<div class="onethird  last">
+        <hr style="width:95%">
+		<div class="onethird">
 			<h2>구입내역</h2>
 			<p>구입 내역 없음</p>
+			<br>
 		</div>
 	</div>
 <hr class="hidden" style="visibility: hidden;" />

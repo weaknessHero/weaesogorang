@@ -26,10 +26,16 @@
 	<a href="{% url 'home' %}"><img src="{% static 'chat/img/쇠고랑logo.png' %}" class="weegle" alt="LOGO")></a>
 	<div id="header">
 		<ul id="menu">
-			<li class="current"><a href="/">홈</a></li>
 			{% if user.is_authenticated %}
-				<p>{{ user.username }}</p>
-				<a href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
+				<li>회원명: {{ user.username }}</li>
+				<li class="current"><a href="/">홈</a></li>
+				<li><a href="javascript:{document.getElementById('logout').submit()}"style="
+				text-decoration: none;
+				font-family: 'Yanone', 'Nanum Gothic', '맑은 고딕', Helvetica, Arial, sans-serif;
+				font-size: 20px;
+				color: #999;
+				text-decoration: none;">
+				로그아웃</a></li>
 				<li><a href="{% url 'mypage' %}">마이페이지</a></li>
 				<form id="logout" method="POST" action="{% url 'logout' %}">
 					{% csrf_token %} <input type="hidden" />

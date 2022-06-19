@@ -4,25 +4,25 @@ from home.models import *
 
 def deal_com(request,post_id):
   if request.method == 'POST' :
-    post = Post.objects.get(id=post_id)
+    post = Post.objects.get(postPIN=post_id)
     post.dealStatus=2
     post.buyer=request.user.username
     post.save()
-    return redirect('/chat/'+str(post.id)+'/delete')
+    return redirect('/chat/'+str(post.postPIN)+'/delete')
 
 
 
 def req_deal(request,post_id) :
-  post = Post.objects.get(id=post_id)
+  post = Post.objects.get(postPIN=post_id)
   post.dealStatus=1
   post.buyer=request.user.username
   post.save()
-  return redirect('/chat/'+str(post.id)+'/'+str(0))
+  return redirect('/chat/'+str(post.postPIN)+'/'+str(0))
 
 
 #검색 기능
 def get_search(request):
-  selectList=['createTime','price','viewCount']
+  selectList=['-createTime','price','viewCount']
 
   if request.method=="GET":
     keyWord=request.GET.get('keyWord','')
@@ -34,16 +34,17 @@ def get_search(request):
 
 #기본 검색을 하거나. 카테고리를 통한 검색
     if(select1 or select2):
+      print(select1, select2)
       
       postList = Post.objects.all()
-      if(select2.isdigit()):
-        searchList = postList.filter(Q(title__icontains = keyWord)|Q(productName__icontains = keyWord)&Q(category=select2))
+      if(select2.isalpha()):
+        searchList = postList.filter((Q(title__icontains = keyWord)&Q(category=select2))|(Q(productName__icontains = keyWord)&Q(category=select2)))
       else:
         searchList = postList.filter(Q(title__icontains = keyWord)|Q(productName__icontains = keyWord))
 
       if(select1.isdigit()):
         searchList = searchList.order_by(selectList[int(select1)])
-        
+      
       context = {'searchList':searchList,  'product':product}
 
       return render(request, 'post/search.html', context)
@@ -69,6 +70,7 @@ def post_send(request):
     post.content= request.POST['description']
     post.status = request.POST['condition']
     post.viewCount = 0
+
     post.price = request.POST['unitPrice']
     post.image = request.FILES['productImage']
     post.dealStatus = 0
@@ -99,9 +101,9 @@ def post_detail(request, post_id):
 def post_edit(request,post_id):
   if request.method=='GET':
     data = Data.objects.all()
-    post = Post.objects.get(id=post_id)
+    post = Post.objects.get(postPIN=post_id)
     content={'post':post, 'data':data}
-    return render(request, 'post/editPost.html',content)
+    return render(request, 'post/createPost.html',content)
 
   if request.method=='POST':
     post= Post.objects.get(id=post_id)

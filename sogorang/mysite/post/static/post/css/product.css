@@ -1,5 +1,4 @@
 *{
-    margin: 0;
     padding: 0;
 }
 
@@ -33,6 +32,11 @@ button.backButton{
     margin-right: 20px;
     font-weight: bold;
 }
+.productDetail .createTime{
+    font-size: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
 
 .productDetail .productDescrip{
     font-size: 100%;
@@ -47,7 +51,7 @@ button.backButton{
 }
 
 .productDetail .ProductLog{
-    font-size: 150%;
+    font-size: 140%;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -84,10 +88,12 @@ button.backButton{
 }
 
 .productDetail hr{
-    color: black;
-    margin-left: 0px;
-    border-width: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
 }
+
 
 #contents .product_image{
     width: 100%;

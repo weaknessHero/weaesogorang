@@ -174,6 +174,17 @@ body {
     font-family: 'Yanone', 'Nanum Gothic', '맑은 고딕', Helvetica, Arial, sans-serif;
 }
 
+#contents h2 {
+    color: #888888;
+    font-size: 30px;
+    line-height: 70px;
+    padding:0 0 15px 0;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #cecece;
+    font-family: 'Yanone', 'Nanum Gothic', '맑은 고딕', Helvetica, Arial, sans-serif;
+}
+
 /*aboutme*/
 .onethird {
     width: 306px;

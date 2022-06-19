@@ -60,7 +60,7 @@ body {
 	color: #fff;
 	text-decoration: none;
 }
-#wrap{width:300px; margin:0 auto;} /*모바일은 통상 가로폭 300으로 잡고 시작*/
+#wrap{width:100%; margin:0 auto;} /*모바일은 통상 가로폭 300으로 잡고 시작*/
 #header{width:100%;padding:30px 0;}
 #logo {text-align:center;}
 #menu li{display:inline;margin: 0 0 0 12px;} /*원래 블록요소였던 것은 인라인요소로 바꿔도 기본요소는 어느정도 가져감. 원래 인라인은 상하여백 조절이 불가함*/

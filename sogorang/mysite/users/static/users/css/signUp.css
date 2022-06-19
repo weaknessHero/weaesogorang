@@ -6,16 +6,12 @@
     width: 380px; 
     height: 520px; 
     margin: auto; 
-    border-radius: 3px; 
-    box-shadow: 0px 0px 20px #7cc0cb;
 }
 
 .login_container1{
-    width: 380px; 
+    width: 1000px; 
     height: 350px; 
     margin: auto; 
-    border-radius: 3px; 
-    box-shadow: 0px 0px 20px #7cc0cb;
 }
 
 .form_container{
@@ -28,19 +24,11 @@
     text-align: center;
 }
 
-.form_title_p{
-    font-weight: bold; 
-    font-size: 22px; 
-    display: inline-block; 
-    padding-top: 8px;
-}
-
 .form_input{
     width: 98%; 
     height: 30px; 
     border: 1px solid; 
     border-radius: 3px; 
-    border-color: gray;
 }
 
 .form_item_name{

@@ -17,17 +17,17 @@
         </ul>
     </div>
     <br>
-    <div class="chating_form">
-        <button class="chating1" id="chating1" onclick=on_chat1() value="거래를 원해요">거래를 원해요</button>
-        <button class="chating2" id="chating2" onclick=on_chat2() value="죄송해요, 다른 분과 거래가 진행중입니다.">죄송해요, 다른 분과 거래가 진행중입니다.</button>
-        <button class="chating3" id="chating3" onclick=on_chat3() value="거래를 확정하겠습니다.">거래를 확정하겠습니다.</button>
-        <button class="chating4" id="chating4" onclick=on_chat4() value="지금 출발합니다~">지금 출발합니다~</button>
-        <button class="chating5" id="chating5" onclick=on_chat5() value="곧 도착해요 잠시만 기다려주세요.">곧 도착해요 잠시만 기다려주세요.</button>
-        <button class="chating6" id="chating6" onclick=on_chat6() value="어디세요?">어디세요?</button>
-        <button class="chating7" id="chating7" onclick=on_chat7() value="도착했습니다.">도착했습니다.</button>
-        <button class="chating8" id="chating8" onclick=on_chat8() value="채팅8">채팅8</button>
-        <button class="chating9" id="chating9" onclick=on_chat9() value="채팅9">채팅9</button>
-        <button class="chating10" id="chating10" onclick=on_chat10() value="채팅10">채팅10</button>
+    <div class="chating_form" style="margin-left:8px">
+        <li><button class="chating1" id="chating1" onclick=on_chat1() value="거래를 원해요">거래를 원해요</button></li>
+        <li><button class="chating2" id="chating2" onclick=on_chat2() value="죄송해요, 다른 분과 거래가 진행중입니다.">죄송해요, 다른 분과 거래가 진행중입니다.</button></li>
+        <li><button class="chating3" id="chating3" onclick=on_chat3() value="거래를 확정하겠습니다.">거래를 확정하겠습니다.</button></li>
+        <li><button class="chating4" id="chating4" onclick=on_chat4() value="지금 출발합니다~">지금 출발합니다~</button></li>
+        <li><button class="chating5" id="chating5" onclick=on_chat5() value="곧 도착해요 잠시만 기다려주세요.">곧 도착해요 잠시만 기다려주세요.</button></li>
+        <li><button class="chating6" id="chating6" onclick=on_chat6() value="어디세요?">어디세요?</button></li>
+        <li><button class="chating7" id="chating7" onclick=on_chat7() value="도착했습니다.">도착했습니다.</button></li>
+        <li><button class="chating8" id="chating8" onclick=on_chat8() value="채팅8">채팅8</button></li>
+        <li><button class="chating9" id="chating9" onclick=on_chat9() value="채팅9">채팅9</button></li>
+        <li><button class="chating10" id="chating10" onclick=on_chat10() value="채팅10">채팅10</button></li>
         <br>
     </div>
 
@@ -35,7 +35,7 @@
     <input id="chat-message-submit" style="display:none" type="button" value="Send"/>
     <form action="{% url 'room' roomName=room_name_json img_onmessage=1%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="images" id="images" accept="image/*">
+        <input type="file" name="images" id="images" accept="image/*" style="margin-left:8px">
         <input type="submit" style="display:none" id="file-submit"></button>
     </form>
     <button id="chat-close" style="display:none">나가기</button>   

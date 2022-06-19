@@ -18,7 +18,7 @@
 	{% block head %}
 	{% endblock %}
 </head>
-<body>
+<body style="margin:0px;">
   
 	<div id="skipNav">
 		<a href="">신뢰성 높은 중고거래, 쇠고랑</a>
@@ -27,13 +27,12 @@
 	<a href="{% url 'home' %}"><img src="{% static 'users/img/쇠고랑logo.png' %}" class="weegle" alt="LOGO")></a>
 	<div id="header">
 		<ul id="menu">
-			<li class="current"><a href="/">홈</a></li>
 			{% if user.is_authenticated %}
-				<p>{{ user.username }}</p>
+				<li>회원명: {{ user.username }}</p>
 				<a href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
+				<li class="current"><a href="/">홈</a></li>
 				<li><a href="{% url 'mypage' %}">마이페이지</a></li>
 				<li><a href="{% url 'create' %}">상품등록</a></li>
-				<li><a href="">현재위치</a></li>
 				<form id="logout" method="POST" action="{% url 'logout' %}">
 					{% csrf_token %} <input type="hidden" />
 				</form>

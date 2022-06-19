@@ -13,22 +13,22 @@
 </style>
 {% endblock%}
 <hr class="hidden" />
-	<div id="contents">
+	<div id="contents" style="width: 95%; margin-left:8px;">
 		<form action="/post/send/" method="post" enctype="multipart/form-data" >
 			{% csrf_token %}
-			<h1>상품등록</h1>
+			<h2 style="text-align:center;">상품등록</h2>
 
 			<div class="form-group row">
 				<label class="product_category">제목</label>
 				<div class="product_category_detail">
-					<input type="text" id="title" name="title" class="form-control">
+					<input type="text" id="title" name="title" class="form-control" value="{{post.title}}">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="product_image">상품 이미지</label>
 				<div>
-					<img src="" id="preview" alt="이미지 미리보기"  width="300px"></img>
+					<img src="{{ data.image.url }}" width=300px id="preview" alt="이미지 미리보기"></img>
 					<input type="file" id="productImage" name="productImage" accept="image/*" class="form-control">
 				</div>
 			</div>
@@ -36,54 +36,69 @@
 			<div class="form-group row">
 				<label class="product_main">상품명</label>
 				<div class="com-sm-5">
-					<input type="text" id="productName" name="productName" class="form-control">
+					<input type="text" id="productName" name="productName" class="form-control" value="{{post.productName}}">
 				</div>
 			</div>
-
 
 			<div class="form-group row">
-				<label class="product_name">카테고리</label>
-				<div class="product_name_detail">
-					<input type="radio" name="category" value="Clothing"> 의류
-					<input type="radio" name="category" value="Electronics"> 전자제품
-					<input type="radio" name="category" value="Stationery"> 문구
-					<input type="radio" name="category" value="Food"> 식품
-					<input type="radio" name="category" value="Household"> 생활용품
+				<label class="product_category">카테고리</label>
+				<div class="product_category_detail">
+					
+					{% if post.category == "Clothing" %} <input type="radio" name="category" value="Clothing" checked> 의류{% else %}<input type="radio" name="category" value="Clothing"> 의류 {%endif%}
+					{% if post.category == "Electronics" %} <input type="radio" name="category" value=1 checked> 전자제품{% else %}<input type="radio" name="category" value="Electronics"> 전자제품 {%endif%}
+					{% if post.category == "Stationery" %} <input type="radio" name="category" value=2 checked> 문구{% else %}<input type="radio" name="category" value="Stationery"> 문구 {%endif%}
 				</div>
 			</div>
+
 			<select name="productPIN" float="right">
 				<option name="none">---</option>
 				{% for data in data %}
+					{% if post.productPIN == data.productPIN %} 
+					<option name="name" value={{data.productPIN}} selected>{{data.name}}</option>
+					{% else %}
 					<option name="name" value={{data.productPIN}}>{{data.name}}</option>
+					{% endif %}
 				{% endfor %}
 			</select>			
 
+			
 
 			<div class="form-group row">
 				<label class="product_price">가격</label>
 				<div class="com-sm-3">
-					<input type="text" id="unitPrice" name="unitPrice" class="form-control">
+					<input type="text" id="unitPrice" name="unitPrice" class="form-control" value="{{post.price}}">
 				</div>
 			</div>
+
+			<div class="form-group row">
+				<label class="product_detail"> 지역 </label>
+				<div class="com-sm-5">
+					<textarea name="location" cols="25" rows="1" class="form-control">{{post.dealAddress}}</textarea>
+				</div>
+			</div>
+
+
 
 			<div class="form-group row">
 				<label class="product_detail">상세 내용</label>
 				<div class="com-sm-5">
-					<textarea name="description" cols="50" rows="2" class="form-control"></textarea>
+					<textarea name="description" cols="50" rows="2" class="form-control">{{post.content}}</textarea>
 				</div>
 			</div>
+
+
 
 			<div class="form-group row">
 				<label class="product_condition">상태</label>
 				<div class="com-sm-5">
-					<input type="radio" name="condition" value="상급"> 상급
-					<input type="radio" name="condition" value="중급"> 중급
-					<input type="radio" name="condition" value="하급"> 하급
+					
+					{% if post.status == "상급" %}<input type="radio" id="status" name="condition" value="상급" checked> 상급{% else %}<input type="radio" name="condition" value="상급"> 상급{%endif%}
+					{% if post.status == "중급" %} <input type="radio" id="status" name="condition" value="중급" checked> 중급{% else %}<input type="radio" name="condition" value="중급"> 중급{%endif%}
+					{% if post.status == "하급" %} <input type="radio" id="status" name="condition" value="하급" checked> 하급{% else %}<input type="radio" name="condition" value="하급"> 하급{%endif%}
+					
 				</div>
 			</div>
 
-
-			<div>
 				<button type="button" class="geolocationButton" onclick="getCurrentPosBtn()">내 위치 불러오기</button>
 			 <input type="text" id="search_pos"></input>
 			 <button type="button" onclick="getSearchPos()">장소검색</button>
@@ -101,7 +116,7 @@
 		 	<input type="text" style="display:none" name="sel_longitude" id="sel_longitude">
 		 	<input type="text" name="sel_address"	id="sel_address">
 
-			<div class="form-group row">
+			<div class="form-group row" style="width:105%;">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="submit" value="작성">
 				</div>
